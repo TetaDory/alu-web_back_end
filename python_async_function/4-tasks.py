@@ -30,4 +30,4 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
 
 if __name__ == "__main__":
     asyncio.run(task_wait_n)
-  """ Return Async Function """"
+""" Return Async Function """"
