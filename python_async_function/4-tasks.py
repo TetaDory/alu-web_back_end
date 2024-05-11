@@ -1,33 +1,36 @@
 #!/usr/bin/env python3
-
-
-""" Import Modules """
-
-
+"""
+Tasks
+"""
 import asyncio
 from typing import List
+from asyncio import gather
 
-task_wait_random = __import__('3-task_wait_random').task_wait_random
+
+task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Calls task_wait_random n times with the specified max_delay and returns a list of the results.
-
+    Function that executes multiple coroutines by calling 'task_wait_random'
     Args:
-        n (int): The number of times to call task_wait_random.
-        max_delay (int): The maximum delay in seconds.
-
-    Returns:
-        List[float]: A list containing the results of calling task_wait_random.
+        n -> number of times to spawn 'task_wait_random'
+        max_delay -> the number of seconds to wait before returning output
     """
-    results = []
+    tasks = [task_wait_random(max_delay) for _ in range(n)]
+    data_list = await gather(*tasks)
+    new_list = []
 
-    for _ in range(n):
-        results.append(await task_wait_random(max_delay))
+    while data_list:
+        minimum = data_list[0]  # arbitrary number in list
+        for x in data_list:
+            if x < minimum:
+                minimum = x
+        new_list.append(minimum)
+        data_list.remove(minimum)
 
-    return results
+    return new_list
+
 
 if __name__ == "__main__":
     asyncio.run(task_wait_n)
-""" Return Async Function """"
