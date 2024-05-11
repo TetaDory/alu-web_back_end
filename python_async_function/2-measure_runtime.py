@@ -17,4 +17,3 @@ def measure_time(n: int, max_delay: int) -> float:
     total_time = time.perf_counter() - s
     return total_time / n
     """ Return The Total Execution Time """
-  
