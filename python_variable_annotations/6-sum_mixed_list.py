@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-""" import modulesList and Union from typing """
+""" import module """
 
 
 from typing import List, Union

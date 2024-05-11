@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""Import Modules"""
+"""Import Module """
 
 
 from typing import Iterable, Sequence, Tuple, List
