@@ -20,7 +20,6 @@ class Config(object):
 app.config.from_object(Config)
 
 
-@babel.localeselector
 def get_locale():
     """Selects the best matching locale from the user's browser preferences."""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
