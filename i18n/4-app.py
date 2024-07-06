@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-"""Basic Flask app that implements i18n and internationalization"""
-
+"""
+Route module for the API
+"""
 from flask import Flask, render_template, request
+from os import getenv
 from flask_babel import Babel
+
 
 app = Flask(__name__)
 
 
 class Config:
-    """Config class for your application, it deals with babel mostly"""
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
+    """ class config"""
+    LANGUAGES = ['en', 'fr']
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
 app.config.from_object(Config)
@@ -20,18 +23,22 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    """Get locale for your application"""
-    locale = request.args.get('locale')
-    if locale and locale in app.config['LANGUAGES']:
-        return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    """best match locale lang"""
+    local_lang = request.args.get('locale')
+    support_lang = app.config['LANGUAGES']
+    if local_lang in support_lang:
+        return local_lang
+    else:
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/', methods=['GET'], strict_slashes=False)
-def home():
-    """Home page for your application"""
-    return render_template('4-index.html')
+@app.route('/')
+def index():
+    """hello world"""
+    return render_template("4-index.html", message="Welcome to Holberton")
 
 
 if __name__ == "__main__":
-    app.run()
+    host = getenv("API_HOST", "0.0.0.0")
+    port = getenv("API_PORT", "5000")
+    app.run(host=host, port=port)
