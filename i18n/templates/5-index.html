@@ -1,41 +1,26 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <title>{{_('home_title')}}</title> -->
-    <title>Hello world!</title>
+    <title>User Login Mock</title>
 </head>
 <body>
-    <h1>Hello world!</h1>
-    <!-- <h1>{{_('home_header')}}</h1> -->
-    <!-- {% if login %}
-    <p>{{ _('logged_in_as', username=g.user['name']) }}</p>
-    {% else %}
-    <p>{{ _('not_logged_in') }}</p>
-    {% endif %}
-</body>
-</html> -->
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>{{_('home_title')}}</title>
-</head>
-<body>
-    <h1>{{_('home_header')}}</h1> -->
-    <p>
-        {% if g.user %}
-            {% if g.user['locale'] == 'fr' %}
-                Vous êtes connecté en tant que {{ g.user['name'] }}.
+    {% if g.user %}
+        <p>
+            {% if request.args.get('locale') == 'fr' %}
+                Vous êtes connecté en tant que {{ g.user.name }}.
             {% else %}
-                You are logged in as {{ g.user['name'] }}.
+                You are logged in as {{ g.user.name }}.
             {% endif %}
-        {% else %}
-            {% if g.user and g.user['locale'] == 'fr' %}
+        </p>
+    {% else %}
+        <p>
+            {% if request.args.get('locale') == 'fr' %}
                 Vous n'êtes pas connecté.
             {% else %}
                 You are not logged in.
             {% endif %}
-        {% endif %}
-    </p>
+        </p>
+    {% endif %}
 </body>
 </html>
