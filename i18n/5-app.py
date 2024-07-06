@@ -16,18 +16,16 @@ users: Dict[int, Dict[str, Optional[str]]] = {
 }
 
 
-def get_user() -> Optional[Dict[str, Any]]:
+def get_user():
     """
     Get user by ID from the users dictionary.
     :return: A user dictionary if found, otherwise None.
     """
     try:
-        user_id: Optional[str] = request.args.get('login_as')
-        if user_id is not None:
-            return users.get(int(user_id))
+        login_as = int(request.args.get('login_as'))
+        return users.get(login_as)
     except (ValueError, TypeError):
         return None
-    return None
 
 
 @app.before_request
