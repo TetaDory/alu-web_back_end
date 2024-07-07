@@ -81,4 +81,3 @@ class Cache:
     def get_str(self, key: str) -> str:
         """ Given a key, returns the key as a string value """
         return str(self._redis.get(key), 'UTF-8')
-    
