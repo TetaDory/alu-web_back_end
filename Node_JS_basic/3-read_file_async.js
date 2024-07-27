@@ -39,9 +39,9 @@ function countStudents(path) {
 
         console.log(msg);
 
-            response.push(msg);
-        }
-        resolve(response);
+        response.push(msg);
+      }
+      resolve(response);
     });
   });
 }
