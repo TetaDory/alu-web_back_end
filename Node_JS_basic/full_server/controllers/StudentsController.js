@@ -31,12 +31,12 @@ class StudentsController {
       response.send(500, 'Major parameter must be CS or SWE');
     } else {
       readDatabase(DATABASE)
-      .then((fields) => {
-        const students = fields[major];
+        .then((fields) => {
+          const students = fields[major];
 
-        response.send(200, `List: ${students.join(', ')}`);
+          response.send(200, `List: ${students.join(', ')}`);
         })
-      .catch(() => response.send(500, 'Cannot load the database'));
+        .catch(() => response.send(500, 'Cannot load the database'));
     }
   }
 }
